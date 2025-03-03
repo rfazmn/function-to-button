@@ -1,19 +1,22 @@
 using UnityEditor;
 
-[CustomEditor(typeof(object), true)]
-[CanEditMultipleObjects]
-public class ButtonEditor : Editor
-{
-    ButtonDrawer buttonDrawer;
+#if UNITY_EDITOR
 
-    private void OnEnable()
+    [CustomEditor(typeof(object), true)]
+    [CanEditMultipleObjects]
+    public class ButtonEditor : Editor
     {
-        buttonDrawer = new ButtonDrawer(target);
-    }
+        ButtonDrawer buttonDrawer;
 
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-        buttonDrawer.DrawButtons(targets);
+        private void OnEnable()
+        {
+            buttonDrawer = new ButtonDrawer(target);
+        }
+
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            buttonDrawer.DrawButtons(targets);
+        }
     }
-}
+#endif
